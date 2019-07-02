@@ -49,6 +49,7 @@ public class Banner extends ViewPager {
 
     private synchronized void play() {
         PagerAdapter pagerAdapter = getAdapter();
+
         if (pagerAdapter != null) {
             int count = pagerAdapter.getCount();
 

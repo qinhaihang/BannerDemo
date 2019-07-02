@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         vp_banner = findViewById(R.id.vp_banner);
 
-        ArrayList<Integer> images = new ArrayList<>();
-        images.add(R.drawable.image1);
-        images.add(R.drawable.image2);
-        images.add(R.drawable.image3);
+        ArrayList<BannerBean> images = new ArrayList<>();
+        images.add(new BannerBean(10,R.drawable.image1));
+        images.add(new BannerBean(5,R.drawable.image2));
+        images.add(new BannerBean(10,R.drawable.image3));
 
         MyPageAdapter myPageAdapter = new MyPageAdapter(this,images);
         vp_banner.setAdapter(myPageAdapter);
@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
     class MyPageAdapter extends PagerAdapter{
 
-        ArrayList<Integer> images;
+        public ArrayList<BannerBean> images;
         private Context mContext;
 
-        public MyPageAdapter(Context context,ArrayList<Integer> images) {
+        public MyPageAdapter(Context context,ArrayList<BannerBean> images) {
             this.images = images;
             mContext = context;
         }
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
             ImageView imageView = new ImageView(mContext);
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), images.get(position));
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), images.get(position).getImage());
             imageView.setImageBitmap(bitmap);
             container.addView(imageView);
             return imageView;
