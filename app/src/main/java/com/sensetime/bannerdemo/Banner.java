@@ -3,9 +3,10 @@ package com.sensetime.bannerdemo;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+
+import java.util.ArrayList;
 
 /**
  * @author qinhaihang_vendor
@@ -48,9 +49,12 @@ public class Banner extends ViewPager {
     }
 
     private synchronized void play() {
-        PagerAdapter pagerAdapter = getAdapter();
+        MainActivity.MyPageAdapter pagerAdapter = (MainActivity.MyPageAdapter)getAdapter();
 
         if (pagerAdapter != null) {
+
+            ArrayList<BannerBean> images = pagerAdapter.images;
+
             int count = pagerAdapter.getCount();
 
             int currentItem = getCurrentItem();
@@ -58,6 +62,8 @@ public class Banner extends ViewPager {
             if (currentItem < count - 1) {
                 currentItem++;
                 setCurrentItem(currentItem);
+                long showTime = images.get(currentItem).getShowTime();
+                start(showTime);
             } else {
                 //回调
                 currentItem = 0;

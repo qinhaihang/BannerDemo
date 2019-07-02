@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         vp_banner = findViewById(R.id.vp_banner);
 
         ArrayList<BannerBean> images = new ArrayList<>();
-        images.add(new BannerBean(10,R.drawable.image1));
-        images.add(new BannerBean(5,R.drawable.image2));
-        images.add(new BannerBean(10,R.drawable.image3));
+        images.add(new BannerBean(10*1000,R.mipmap.image1));
+        images.add(new BannerBean(5*1000,R.mipmap.image2));
+        images.add(new BannerBean(10*1000,R.mipmap.image3));
 
         MyPageAdapter myPageAdapter = new MyPageAdapter(this,images);
         vp_banner.setAdapter(myPageAdapter);
@@ -38,10 +39,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        vp_banner.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     public void click(View view) {
-        vp_banner.start(1000);
+        vp_banner.start(1000*10);
     }
 
     class MyPageAdapter extends PagerAdapter{
